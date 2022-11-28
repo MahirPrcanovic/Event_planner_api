@@ -20,6 +20,6 @@ public class AppUser {
     private String email;
     private String password;
     @ManyToOne
-    @JoinColumn(name="role_id", nullable=false)
+    @JoinColumn(name="role_id")
     private Role role;
 }
