@@ -1,5 +1,6 @@
 package com.example.dogadjaji213.service.user;
 
+import com.example.dogadjaji213.dto.RegisterDto;
 import com.example.dogadjaji213.model.AppUser;
 import com.example.dogadjaji213.model.Role;
 import com.example.dogadjaji213.repository.RoleRepository;
@@ -10,7 +11,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +25,12 @@ public class UserService implements IUserService,UserDetailsService {
     private final RoleRepository _roleRepository;
     private final PasswordEncoder _passwordEncoder;
     @Override
-    public AppUser saveUser(AppUser appUser) {
-        appUser.setPassword(this._passwordEncoder.encode(appUser.getPassword()));
-        return this._userRepository.save(appUser);
+    public AppUser saveUser(RegisterDto appUser) {
+        AppUser user = new AppUser( appUser.getFirstName(), appUser.getLastName(), appUser.getEmail(), appUser.getPassword());
+        user.setPassword(this._passwordEncoder.encode(appUser.getPassword()));
+        this._userRepository.save(user);
+        this.addRoleToUser(appUser.getEmail(),"USER");
+        return user;
     }
 
     @Override

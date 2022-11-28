@@ -1,5 +1,6 @@
 package com.example.dogadjaji213;
 
+import com.example.dogadjaji213.dto.RegisterDto;
 import com.example.dogadjaji213.model.AppUser;
 import com.example.dogadjaji213.model.Role;
 import com.example.dogadjaji213.service.user.UserService;
@@ -22,8 +23,8 @@ public class Dogadjaji213Application {
             userService.saveRole(new Role(null,"USER"));
             userService.saveRole(new Role(null,"ADMIN"));
 
-            userService.saveUser(new AppUser(null,"mahir","prcanovic","mahirprcanovic@gmail.com","1234",null));
-            userService.saveUser(new AppUser(null, "asim","bajric","asimb@gmail.com","1234",null));
+            userService.saveUser(new RegisterDto("mahir","prcanovic","mahirprcanovic@gmail.com","1234"));
+            userService.saveUser(new RegisterDto( "asim","bajric","asimb@gmail.com","1234"));
 
             userService.addRoleToUser("mahirprcanovic@gmail.com","ADMIN");
             userService.addRoleToUser("asimb@gmail.com","USER");
