@@ -44,10 +44,9 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authz) -> authz.requestMatchers("/user/hi").hasAnyAuthority("USER")
                         .anyRequest().permitAll()
-                )
-                .httpBasic(withDefaults());
+                ).formLogin().loginPage("/login").permitAll();
+
         http.authenticationProvider(authenticationProvider());
         return http.build();
     }
 }
-

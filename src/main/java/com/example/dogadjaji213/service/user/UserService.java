@@ -7,7 +7,9 @@ import com.example.dogadjaji213.repository.RoleRepository;
 import com.example.dogadjaji213.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -61,13 +63,17 @@ public class UserService implements IUserService,UserDetailsService {
         }
         return user;
     }
-
     @Override
     public List<AppUser> getUsers() {
         List<AppUser> users  = this._userRepository.findAll();
         return users;
     }
-
+    @Override
+    public void changePassword(String pwd) {
+        AppUser appUser= this._userRepository.findByEmail("mahirprcanovic@gmail.com"); /*Admin je samo jedan korisnik i on je postavljen na mahirprcanovic@gmail.com account*/
+        appUser.setPassword(this._passwordEncoder.encode(pwd));
+        this._userRepository.save(appUser);
+    }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         AppUser user = this._userRepository.findByEmail(email);
