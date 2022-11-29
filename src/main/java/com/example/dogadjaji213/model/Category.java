@@ -1,5 +1,4 @@
 package com.example.dogadjaji213.model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,5 +20,4 @@ public class Category {
     private Long id;
     private String name;
     private String iconUrl;
-
 }

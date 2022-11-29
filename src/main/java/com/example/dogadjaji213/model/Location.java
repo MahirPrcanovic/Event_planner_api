@@ -1,5 +1,4 @@
 package com.example.dogadjaji213.model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,4 +22,5 @@ public class Location {
     private String name;
     private String description;
     private String pictureUrl;
+
 }
