@@ -17,6 +17,7 @@ public class AppUser {
         this.lastName=lastName;
         this.email=email;
         this.password=password;
+        this.isBanned=false;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +28,7 @@ public class AppUser {
     private String lastName;
     private String email;
     private String password;
+    private Boolean isBanned;
     @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;

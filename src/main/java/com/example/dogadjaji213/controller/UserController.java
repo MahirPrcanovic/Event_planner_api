@@ -32,4 +32,10 @@ public class UserController {
         this._userService.changePassword(password);
         return "success";
     }
+    @PutMapping("/ban/{email}")
+    public ResponseEntity<?> updateUserBanned(@PathVariable String email){
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/ban/{id}").toUriString());
+        this._userService.updateIsBanned(email);
+        return ResponseEntity.created(uri).body("");
+    }
 }

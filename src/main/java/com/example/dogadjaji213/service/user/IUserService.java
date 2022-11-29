@@ -15,4 +15,5 @@ public interface IUserService {
     AppUser getUser(String email);
     List<AppUser> getUsers();
     void changePassword(String password);
+    void updateIsBanned(String email);
 }
