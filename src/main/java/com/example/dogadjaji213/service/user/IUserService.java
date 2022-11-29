@@ -14,4 +14,5 @@ public interface IUserService {
     void addRoleToUser(String email,String roleName);
     AppUser getUser(String email);
     List<AppUser> getUsers();
+    void changePassword(String password);
 }
