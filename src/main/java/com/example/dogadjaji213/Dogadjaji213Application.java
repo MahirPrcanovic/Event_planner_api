@@ -22,10 +22,8 @@ public class Dogadjaji213Application {
         return args ->{
             userService.saveRole(new Role(null,"USER"));
             userService.saveRole(new Role(null,"ADMIN"));
-
             userService.saveUser(new RegisterDto("mahir","prcanovic","mahirprcanovic@gmail.com","1234"));
             userService.saveUser(new RegisterDto( "asim","bajric","asimb@gmail.com","1234"));
-
             userService.addRoleToUser("mahirprcanovic@gmail.com","ADMIN");
             userService.addRoleToUser("asimb@gmail.com","USER");
         };
