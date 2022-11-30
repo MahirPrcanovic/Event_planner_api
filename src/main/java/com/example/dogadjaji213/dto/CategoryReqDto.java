@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CategoryDto {
+public class CategoryReqDto {
     private String name;
     private String iconUrl;
 }

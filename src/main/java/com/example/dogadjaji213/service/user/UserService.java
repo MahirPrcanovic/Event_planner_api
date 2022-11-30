@@ -1,23 +1,20 @@
 package com.example.dogadjaji213.service.user;
 
-import com.example.dogadjaji213.dto.RegisterDto;
-import com.example.dogadjaji213.dto.UserCreatedDto;
+import com.example.dogadjaji213.dto.RegisterReqDto;
+import com.example.dogadjaji213.dto.UserCreatedResDto;
 import com.example.dogadjaji213.model.AppUser;
 import com.example.dogadjaji213.model.Role;
 import com.example.dogadjaji213.repository.RoleRepository;
 import com.example.dogadjaji213.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
 @Service
@@ -28,12 +25,12 @@ public class UserService implements IUserService,UserDetailsService {
     private final RoleRepository _roleRepository;
     private final PasswordEncoder _passwordEncoder;
     @Override
-    public UserCreatedDto saveUser(RegisterDto appUser) {
+    public UserCreatedResDto saveUser(RegisterReqDto appUser) {
         AppUser user = new AppUser(appUser.getFirstName(), appUser.getLastName(), appUser.getEmail(), appUser.getPassword());
         user.setPassword(this._passwordEncoder.encode(appUser.getPassword()));
         var returnUser=this._userRepository.save(user);
         this.addRoleToUser(appUser.getEmail(),"USER");
-        return new UserCreatedDto(returnUser.getId(),returnUser.getFirstName(),returnUser.getLastName(),returnUser.getEmail());
+        return new UserCreatedResDto(returnUser.getId(),returnUser.getFirstName(),returnUser.getLastName(),returnUser.getEmail());
     }
 
     @Override

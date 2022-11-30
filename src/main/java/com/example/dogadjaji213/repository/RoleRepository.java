@@ -3,6 +3,8 @@ package com.example.dogadjaji213.repository;
 import com.example.dogadjaji213.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoleRepository extends JpaRepository<Role,Long> {
+import java.util.UUID;
+
+public interface RoleRepository extends JpaRepository<Role, UUID> {
     Role findByName(String name);
 }

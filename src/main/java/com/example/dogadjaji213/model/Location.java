@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -17,8 +18,8 @@ public class Location {
         this.pictureUrl=pictureUrl;
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue()
+    private UUID id;
     private String name;
     private String description;
     private String pictureUrl;

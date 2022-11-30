@@ -1,6 +1,6 @@
 package com.example.dogadjaji213.service.category;
 
-import com.example.dogadjaji213.dto.CategoryDto;
+import com.example.dogadjaji213.dto.CategoryReqDto;
 import com.example.dogadjaji213.model.Category;
 import com.example.dogadjaji213.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ public class CategoryService implements ICategory{
     }
 
     @Override
-    public Category createNewCategory(CategoryDto category) {
+    public Category createNewCategory(CategoryReqDto category) {
         Category dbCategory = new Category(category.getName(),category.getIconUrl());
         Category categoryRes = this._categoryRepository.save(dbCategory);
         return categoryRes;

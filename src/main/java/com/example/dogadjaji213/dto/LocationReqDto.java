@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class LocationDto {
+public class LocationReqDto {
     private String name;
     private String description;
     private String pictureUrl;

@@ -1,6 +1,6 @@
 package com.example.dogadjaji213.controller;
 
-import com.example.dogadjaji213.dto.CategoryDto;
+import com.example.dogadjaji213.dto.CategoryReqDto;
 import com.example.dogadjaji213.model.Category;
 import com.example.dogadjaji213.service.category.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class CategoryController {
         return ResponseEntity.ok().body(this._categoryService.getAll());
     }
     @PostMapping
-    private ResponseEntity<Category> Post(@RequestBody CategoryDto category){
+    private ResponseEntity<Category> Post(@RequestBody CategoryReqDto category){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/location").toUriString());
         return ResponseEntity.created(uri).body(this._categoryService.createNewCategory(category));
     }

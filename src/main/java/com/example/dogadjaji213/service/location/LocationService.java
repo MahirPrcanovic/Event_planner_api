@@ -1,6 +1,6 @@
 package com.example.dogadjaji213.service.location;
 
-import com.example.dogadjaji213.dto.LocationDto;
+import com.example.dogadjaji213.dto.LocationReqDto;
 import com.example.dogadjaji213.model.Location;
 import com.example.dogadjaji213.repository.LocationRepository;
 import jakarta.transaction.Transactional;
@@ -21,7 +21,7 @@ public class LocationService implements ILocation{
     }
 
     @Override
-    public Location createNewLocation(LocationDto location) {
+    public Location createNewLocation(LocationReqDto location) {
         Location dbLocation = new Location(location.getName(),location.getDescription(),location.getPictureUrl());
         Location loc = this._locationRepo.save(dbLocation);
         return loc;

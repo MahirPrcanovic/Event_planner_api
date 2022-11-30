@@ -1,12 +1,9 @@
 package com.example.dogadjaji213.controller;
 
-import com.example.dogadjaji213.dto.RegisterDto;
-import com.example.dogadjaji213.model.AppUser;
+import com.example.dogadjaji213.dto.RegisterReqDto;
 import com.example.dogadjaji213.service.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,7 +20,7 @@ public class UserController {
         return "hello";
     }
     @PostMapping("/user/save")
-    public ResponseEntity<?> register(@RequestBody RegisterDto registerDto){
+    public ResponseEntity<?> register(@RequestBody RegisterReqDto registerDto){
 
         return ResponseEntity.ok().body(this._userService.saveUser(registerDto));
     }

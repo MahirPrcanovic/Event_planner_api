@@ -1,9 +1,7 @@
 package com.example.dogadjaji213.service.category;
 
-import com.example.dogadjaji213.dto.CategoryDto;
-import com.example.dogadjaji213.dto.LocationDto;
+import com.example.dogadjaji213.dto.CategoryReqDto;
 import com.example.dogadjaji213.model.Category;
-import com.example.dogadjaji213.model.Location;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,5 +9,5 @@ import java.util.List;
 
 public interface ICategory {
     List<Category> getAll();
-    Category createNewCategory(CategoryDto category);
+    Category createNewCategory(CategoryReqDto category);
 }
