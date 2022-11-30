@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -21,4 +22,6 @@ public class Category {
     private UUID id;
     private String name;
     private String iconUrl;
+    @OneToMany(mappedBy = "category")
+    private List<Event> events;
 }

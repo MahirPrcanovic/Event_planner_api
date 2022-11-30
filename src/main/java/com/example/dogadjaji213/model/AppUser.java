@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -41,4 +42,6 @@ public class AppUser {
     @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;
+    @OneToMany(mappedBy = "appUser")
+    private List<Comment> comments;
 }

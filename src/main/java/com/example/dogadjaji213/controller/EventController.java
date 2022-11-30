@@ -25,4 +25,9 @@ public class EventController {
     public ResponseEntity<Event> Put(){
         return ResponseEntity.ok().body(this._eventService.updateEvent());
     }
+    @GetMapping
+    @RequestMapping("/event")
+    public ResponseEntity<List<Event>> GetSearch(@RequestParam("search") String search,@RequestParam("location") String location,@RequestParam("category") String category) throws InterruptedException {
+        return ResponseEntity.ok().body(this._eventService.search(search,location,category));
+    }
 }

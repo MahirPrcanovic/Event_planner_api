@@ -1,5 +1,4 @@
 package com.example.dogadjaji213;
-
 import com.example.dogadjaji213.dto.CategoryReqDto;
 import com.example.dogadjaji213.dto.EventReqDto;
 import com.example.dogadjaji213.dto.LocationReqDto;
@@ -13,20 +12,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
 import java.time.LocalDateTime;
-
 @SpringBootApplication
 public class Dogadjaji213Application {
-
     public static void main(String[] args) {
         SpringApplication.run(Dogadjaji213Application.class, args);
     }
     @Bean
     CommandLineRunner run(UserService userService, EventService eventService, LocationService locationService, CategoryService categoryService){
         return args ->{
-            userService.saveRole(new Role(null,"USER"));
-            userService.saveRole(new Role(null,"ADMIN"));
+            userService.saveRole(new Role(null,"USER",null));
+            userService.saveRole(new Role(null,"ADMIN",null));
             userService.saveUser(new RegisterReqDto("mahir","prcanovic","mahirprcanovic@gmail.com","1234"));
             userService.saveUser(new RegisterReqDto( "asim","bajric","asimb@gmail.com","1234"));
             userService.addRoleToUser("mahirprcanovic@gmail.com","ADMIN");

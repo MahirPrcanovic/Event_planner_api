@@ -11,4 +11,5 @@ public interface IEventService {
     List<Event> getAll();
     Event createNewEvent(EventReqDto event);
     Event updateEvent();
+    List<Event> search(String search,String location,String category) throws InterruptedException;
 }
