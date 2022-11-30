@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -19,9 +20,17 @@ public class AppUser {
         this.password=password;
         this.isBanned=false;
     }
+    public AppUser(UUID id,String firstName,String lastName,String email){
+        this.id=id;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.email=email;
+    }
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(
+
+    )
+    private UUID id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")

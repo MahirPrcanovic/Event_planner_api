@@ -1,6 +1,7 @@
 package com.example.dogadjaji213.service.user;
 
 import com.example.dogadjaji213.dto.RegisterDto;
+import com.example.dogadjaji213.dto.UserCreatedDto;
 import com.example.dogadjaji213.model.AppUser;
 import com.example.dogadjaji213.model.Role;
 import com.example.dogadjaji213.repository.RoleRepository;
@@ -17,10 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
@@ -30,12 +28,12 @@ public class UserService implements IUserService,UserDetailsService {
     private final RoleRepository _roleRepository;
     private final PasswordEncoder _passwordEncoder;
     @Override
-    public AppUser saveUser(RegisterDto appUser) {
-        AppUser user = new AppUser( appUser.getFirstName(), appUser.getLastName(), appUser.getEmail(), appUser.getPassword());
+    public UserCreatedDto saveUser(RegisterDto appUser) {
+        AppUser user = new AppUser(appUser.getFirstName(), appUser.getLastName(), appUser.getEmail(), appUser.getPassword());
         user.setPassword(this._passwordEncoder.encode(appUser.getPassword()));
-        this._userRepository.save(user);
+        var returnUser=this._userRepository.save(user);
         this.addRoleToUser(appUser.getEmail(),"USER");
-        return user;
+        return new UserCreatedDto(returnUser.getId(),returnUser.getFirstName(),returnUser.getLastName(),returnUser.getEmail());
     }
 
     @Override
@@ -79,8 +77,8 @@ public class UserService implements IUserService,UserDetailsService {
     }
 
     @Override
-    public void updateIsBanned(String email) {
-        AppUser appUser = this._userRepository.findByEmail(email);
+    public void updateIsBanned(UUID id) {
+        AppUser appUser = this._userRepository.findById(id).get();
         if(appUser == null) throw new IllegalStateException("User does not exist!");
         appUser.setIsBanned(!appUser.getIsBanned());
         this._userRepository.save(appUser);
