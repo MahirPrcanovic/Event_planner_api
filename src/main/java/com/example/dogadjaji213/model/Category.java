@@ -22,6 +22,6 @@ public class Category {
     private UUID id;
     private String name;
     private String iconUrl;
-    @OneToMany(mappedBy = "category")
-    private List<Event> events;
+  /*  @OneToMany(mappedBy = "category")
+    private List<Event> events;*/
 }

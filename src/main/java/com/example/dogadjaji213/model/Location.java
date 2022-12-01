@@ -25,7 +25,7 @@ public class Location {
     private String description;
     private String pictureUrl;
 
-    @OneToMany(mappedBy = "location")
-    private List<Event> events;
+   /* @OneToMany(mappedBy = "location")
+    private List<Event> events;*/
 
 }
