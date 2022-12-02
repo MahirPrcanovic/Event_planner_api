@@ -42,6 +42,6 @@ public class AppUser {
     @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;
-    @OneToMany(mappedBy = "appUser")
-    private List<Comment> comments;
+   /* @OneToMany(mappedBy = "appUser")
+    private List<Comment> comments;*/
 }

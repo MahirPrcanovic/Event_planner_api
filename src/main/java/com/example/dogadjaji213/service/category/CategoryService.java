@@ -23,4 +23,5 @@ public class CategoryService implements ICategory{
         Category categoryRes = this._categoryRepository.save(dbCategory);
         return categoryRes;
     }
+    //FALI UPDATE KATEGORIJE!
 }
