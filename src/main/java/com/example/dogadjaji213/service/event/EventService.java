@@ -38,8 +38,7 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public List<Event> search(String search,String location,String category) throws InterruptedException {
-        return null;
-
+    public List<Event> search(String search,String location,String category) {
+        return this._eventRepository.findByName(search);
     }
 }

@@ -27,7 +27,7 @@ public class EventController {
     }
     @GetMapping
     @RequestMapping("/event")
-    public ResponseEntity<List<Event>> GetSearch(@RequestParam("search") String search,@RequestParam("location") String location,@RequestParam("category") String category) throws InterruptedException {
+    public ResponseEntity<List<Event>> GetSearch(@RequestParam("search") String search,@RequestParam("location") String location,@RequestParam("category") String category){
         return ResponseEntity.ok().body(this._eventService.search(search,location,category));
     }
 }
