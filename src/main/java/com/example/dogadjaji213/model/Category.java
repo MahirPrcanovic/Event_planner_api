@@ -22,10 +22,4 @@ public class Category {
     private UUID id;
     private String name;
     private String iconUrl;
-<<<<<<< HEAD
-   /* @OneToMany(mappedBy = "category")
-=======
-  /*  @OneToMany(mappedBy = "category")
->>>>>>> 4ad065b9f6ef31b4d95e9eabdd79cd039b41f7f0
-    private List<Event> events;*/
 }
