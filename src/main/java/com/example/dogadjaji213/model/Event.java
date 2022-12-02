@@ -29,6 +29,10 @@ public class Event {
     private Location location;
     @ManyToOne
     private Category category;
+<<<<<<< HEAD
     /*@OneToMany(mappedBy = "event")
+=======
+/*    @OneToMany(mappedBy = "event")
+>>>>>>> 4ad065b9f6ef31b4d95e9eabdd79cd039b41f7f0
     private List<Comment> comments;*/
 }

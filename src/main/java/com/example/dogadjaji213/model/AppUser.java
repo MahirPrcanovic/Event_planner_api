@@ -42,6 +42,10 @@ public class AppUser {
     @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;
+<<<<<<< HEAD
    /* @OneToMany(mappedBy = "appUser")
+=======
+    /*@OneToMany(mappedBy = "appUser")
+>>>>>>> 4ad065b9f6ef31b4d95e9eabdd79cd039b41f7f0
     private List<Comment> comments;*/
 }
