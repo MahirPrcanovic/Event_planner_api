@@ -18,6 +18,6 @@ public class Role {
     @GeneratedValue()
     private UUID id;
     private String name;
-    @OneToMany(mappedBy = "role")
-    private List<AppUser> users;
+    /*@OneToMany(mappedBy = "role")
+    private List<AppUser> users;*/
 }
