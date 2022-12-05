@@ -30,7 +30,7 @@ public class UserController {
         this._userService.changePassword(password);
         return "success";
     }
-    @PutMapping("/ban/{id}")
+    @PatchMapping("/ban/{id}")
     public ResponseEntity<?> updateUserBanned(@PathVariable UUID id){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/ban/{id}").toUriString());
         this._userService.updateIsBanned(id);
