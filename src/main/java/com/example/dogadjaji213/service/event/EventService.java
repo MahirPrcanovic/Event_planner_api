@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +39,7 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public List<Event> search(String search,String location,String category) {
-        return this._eventRepository.findByName(search);
+    public List<Event> search(String search, UUID location, UUID category) {
+        return this._eventRepository.findByNameContainsOrLocation_IdOrCategory_Id(search,location,category);
     }
 }
