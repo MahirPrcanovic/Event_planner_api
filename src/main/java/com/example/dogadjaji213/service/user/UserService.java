@@ -67,10 +67,12 @@ public class UserService implements IUserService,UserDetailsService {
         return users;
     }
     @Override
-    public void changePassword(String pwd) {
+    public AppUser changePassword(String pwd) {
+        System.out.println(pwd);
         AppUser appUser= this._userRepository.findByEmail("mahirprcanovic@gmail.com"); /*Admin je samo jedan korisnik i on je postavljen na mahirprcanovic@gmail.com account*/
         appUser.setPassword(this._passwordEncoder.encode(pwd));
-        this._userRepository.save(appUser);
+        return this._userRepository.save(appUser);
+
     }
 
     @Override

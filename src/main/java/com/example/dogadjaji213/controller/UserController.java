@@ -1,5 +1,6 @@
 package com.example.dogadjaji213.controller;
 
+import com.example.dogadjaji213.dto.ChangePassDto;
 import com.example.dogadjaji213.dto.RegisterReqDto;
 import com.example.dogadjaji213.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,16 +20,17 @@ public class UserController {
     public String get(){
         return "hello";
     }
-    @PostMapping("/user/save")
+    @PostMapping("/save")
     public ResponseEntity<?> register(@RequestBody RegisterReqDto registerDto){
 
         return ResponseEntity.ok().body(this._userService.saveUser(registerDto));
     }
     @PutMapping("/changepass")
-    public String changePass(@RequestBody String password){
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/changepass").toUriString());
-        this._userService.changePassword(password);
-        return "success";
+    public ResponseEntity<?> changePass(@RequestBody ChangePassDto changePassDto){
+        System.out.println(changePassDto.getPassword());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/changepass").toUriString());
+        this._userService.changePassword(changePassDto.getPassword());
+        return ResponseEntity.ok().body(this._userService.changePassword(changePassDto.getPassword()));
     }
     @PatchMapping("/ban/{id}")
     public ResponseEntity<?> updateUserBanned(@PathVariable UUID id){

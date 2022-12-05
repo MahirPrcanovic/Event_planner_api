@@ -42,7 +42,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
        http.cors().and().csrf().disable();
         http
-                .authorizeHttpRequests((authz) -> authz.requestMatchers("/comment").hasAnyAuthority("USER")
+                .authorizeHttpRequests((authz) -> authz.requestMatchers("/user/hi").hasAnyAuthority("USER")
                         .anyRequest().permitAll()
                 ).formLogin().loginPage("/login").permitAll();
 
