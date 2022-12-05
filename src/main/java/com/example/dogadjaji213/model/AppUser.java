@@ -1,5 +1,6 @@
 package com.example.dogadjaji213.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,9 +36,12 @@ public class AppUser {
     @Column(name = "last_name")
     private String lastName;
     private String email;
+    @JsonIgnore
     private String password;
+    @JsonIgnore
     private Boolean isBanned;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="role_id")
     private Role role;
 }

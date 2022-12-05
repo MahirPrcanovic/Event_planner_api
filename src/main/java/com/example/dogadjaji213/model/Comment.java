@@ -4,16 +4,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.UUID;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Comment {
-    public Comment(String comment){
-        this.comment=comment;
+    public Comment(String comment,AppUser appUser,Event event){
+        this.comment=comment; this.appUser=appUser;
+        this.event=event;
     }
     @Id
     @GeneratedValue()
@@ -24,5 +23,4 @@ public class Comment {
     @ManyToOne
     @JsonIgnore
     private Event event;
-
 }

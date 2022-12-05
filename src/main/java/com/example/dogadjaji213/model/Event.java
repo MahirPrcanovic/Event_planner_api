@@ -1,12 +1,10 @@
 package com.example.dogadjaji213.model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 @Entity
@@ -40,4 +38,7 @@ public class Event {
             orphanRemoval = true
     )
     private List<Comment> comments;
+    public void addComment(Comment comment ){
+        this.comments.add(comment);
+    }
 }
