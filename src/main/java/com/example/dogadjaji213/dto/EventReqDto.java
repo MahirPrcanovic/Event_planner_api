@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class EventReqDto {
     private String name;
-    private LocalDateTime date;
+    private LocalDate date;
     private String description;
     private String picUrl;
     private UUID locationID;

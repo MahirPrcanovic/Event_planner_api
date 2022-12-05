@@ -10,6 +10,9 @@ import com.example.dogadjaji213.repository.LocationRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -70,6 +73,6 @@ public class EventService implements IEventService {
 
     @Override
     public List<Event> search(String search, UUID location, UUID category) {
-        return this._eventRepository.findByNameContainsOrLocation_IdOrCategory_Id(search,location,category);
+        return this._eventRepository.findByDateGreaterThanEqualAndNameContainsOrLocation_IdOrCategory_Id(LocalDate.now(),search,location,category);
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @SpringBootApplication
 public class Dogadjaji213Application {
@@ -29,8 +31,8 @@ public class Dogadjaji213Application {
             userService.addRoleToUser("asimb@gmail.com","USER");
             var location = locationService.createNewLocation(new LocationReqDto("BiH-Zenica","stadion","https://www.zenicablog.com/wp-content/uploads/2020/11/stadion-bilino-polje-aerial.jpg"));
             var category = categoryService.createNewCategory(new CategoryReqDto("football match","https://i.ytimg.com/vi/R-cDKTgp7-k/maxresdefault.jpg"));
-            eventService.createNewEvent(new EventReqDto("football_match", LocalDateTime.now(),"lorem ipsum","https://d1e00ek4ebabms.cloudfront.net/production/61a52cef-9a5c-4740-9181-f4b2c68782be.jpg",location.getId(),category.getId()));
-            eventService.createNewEvent(new EventReqDto("test", LocalDateTime.now(),"lorem ipsum","https://d1e00ek4ebabms.cloudfront.net/production/61a52cef-9a5c-4740-9181-f4b2c68782be.jpg",location.getId(),category.getId()));
+            eventService.createNewEvent(new EventReqDto("football_match", LocalDate.now(),"lorem ipsum","https://d1e00ek4ebabms.cloudfront.net/production/61a52cef-9a5c-4740-9181-f4b2c68782be.jpg",location.getId(),category.getId()));
+            eventService.createNewEvent(new EventReqDto("test", LocalDate.now(),"lorem ipsum","https://d1e00ek4ebabms.cloudfront.net/production/61a52cef-9a5c-4740-9181-f4b2c68782be.jpg",location.getId(),category.getId()));
         };
     }
 }

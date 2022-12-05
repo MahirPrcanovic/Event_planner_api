@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 @Entity
@@ -10,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 public class Event {
-    public Event(String name,LocalDateTime date,String description,String pictureUrl){
+    public Event(String name,LocalDate date,String description,String pictureUrl){
         this.name=name;
         this.date=date;
         this.description=description;
@@ -20,7 +22,7 @@ public class Event {
     @GeneratedValue()
     private UUID id;
     private String name;
-    private LocalDateTime date;
+    private LocalDate date;
     private String description;
     private String pictureUrl;
     @ManyToOne
