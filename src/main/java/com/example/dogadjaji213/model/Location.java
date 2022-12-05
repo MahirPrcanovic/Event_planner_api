@@ -1,4 +1,5 @@
 package com.example.dogadjaji213.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,8 +25,12 @@ public class Location {
     private String description;
     private String pictureUrl;
 
-
-   /* @OneToMany(mappedBy = "location")
-    private List<Event> events;*/
-
+    @OneToMany(
+            mappedBy = "location",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true
+    )
+    @JsonIgnore
+    private List<Event> events;
 }

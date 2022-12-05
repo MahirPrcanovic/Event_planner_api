@@ -34,7 +34,7 @@ public class EventService implements IEventService {
     public Event createNewEvent(EventReqDto event) {
         Location location = this._locationRepository.findById(event.getLocationID()).get();
         Category category= this._categoryRepository.findById(event.getCategoryID()).get();
-        Event saveEvent = new Event(null,event.getName(),event.getDate(),event.getDescription(),event.getPicUrl(),location,category);
+        Event saveEvent = new Event(null,event.getName(),event.getDate(),event.getDescription(),event.getPicUrl(),location,category,null);
         return this._eventRepository.save(saveEvent);
     }
 

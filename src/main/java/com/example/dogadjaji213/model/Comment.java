@@ -1,4 +1,5 @@
 package com.example.dogadjaji213.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Comment {
     @ManyToOne
     private AppUser appUser;
     @ManyToOne
+    @JsonIgnore
     private Event event;
 
 }

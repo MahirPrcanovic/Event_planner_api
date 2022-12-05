@@ -1,4 +1,5 @@
 package com.example.dogadjaji213.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +23,12 @@ public class Category {
     private UUID id;
     private String name;
     private String iconUrl;
-
+    @OneToMany(
+            mappedBy = "category",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true
+    )
+    @JsonIgnore
+    private List<Event> events;
 }

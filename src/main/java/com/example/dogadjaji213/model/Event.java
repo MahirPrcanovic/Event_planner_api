@@ -1,4 +1,5 @@
 package com.example.dogadjaji213.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 @Entity
 @AllArgsConstructor
@@ -31,4 +33,11 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+    @OneToMany(
+            mappedBy = "event",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
+    )
+    private List<Comment> comments;
 }
