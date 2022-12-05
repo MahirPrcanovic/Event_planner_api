@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,7 +24,9 @@ public class Event {
     private String description;
     private String pictureUrl;
     @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location;
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 }

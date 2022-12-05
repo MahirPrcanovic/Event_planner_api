@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -24,6 +23,7 @@ public class Location {
     private String name;
     private String description;
     private String pictureUrl;
+
 
    /* @OneToMany(mappedBy = "location")
     private List<Event> events;*/

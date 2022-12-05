@@ -1,5 +1,6 @@
 package com.example.dogadjaji213.controller;
 import com.example.dogadjaji213.dto.EventReqDto;
+import com.example.dogadjaji213.dto.UpdateEventReqDto;
 import com.example.dogadjaji213.model.Event;
 import com.example.dogadjaji213.service.event.EventService;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,9 @@ public class EventController {
     public ResponseEntity<Event> Post(@RequestBody EventReqDto event){
         return ResponseEntity.ok().body(this._eventService.createNewEvent(event));
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Event> Put(){
-        return ResponseEntity.ok().body(this._eventService.updateEvent());
+    @PatchMapping("/{id}")
+    public ResponseEntity<Event> Patch(@PathVariable UUID id, @RequestBody UpdateEventReqDto eventReqDto){
+        return ResponseEntity.ok().body(this._eventService.updateEvent(id,eventReqDto));
     }
     @GetMapping
     public ResponseEntity<List<Event>> GetSearch(@RequestParam(value = "search",required = false,defaultValue = "") String search, @RequestParam(value = "location",required = false,defaultValue = "") String location, @RequestParam(value = "category",required = false,defaultValue = "") String category){

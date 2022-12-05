@@ -1,5 +1,6 @@
 package com.example.dogadjaji213.service.event;
 import com.example.dogadjaji213.dto.EventReqDto;
+import com.example.dogadjaji213.dto.UpdateEventReqDto;
 import com.example.dogadjaji213.model.Category;
 import com.example.dogadjaji213.model.Event;
 import com.example.dogadjaji213.model.Location;
@@ -10,6 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,7 +36,35 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public Event updateEvent() {
+    public Event updateEvent(UUID id, UpdateEventReqDto eventReqDto) {
+        Optional<Event> event = this._eventRepository.findById(id);
+        if(event.isPresent()){
+            if(eventReqDto.getName().isPresent()){
+                event.get().setName(eventReqDto.getName().get());
+            }
+            if(eventReqDto.getPictureUrl().isPresent()){
+                event.get().setPictureUrl(eventReqDto.getPictureUrl().get());
+            }
+            if(eventReqDto.getDescription().isPresent()){
+                event.get().setDescription(eventReqDto.getDescription().get());
+            }
+            if(eventReqDto.getDate().isPresent()){
+                event.get().setDate(eventReqDto.getDate().get());
+            }
+            if(eventReqDto.getLocationID().isPresent()){
+                Optional<Location> location = this._locationRepository.findById(eventReqDto.getLocationID().get());
+                if(location.isPresent()){
+                    event.get().setLocation(location.get());
+                }
+            }
+            if(eventReqDto.getCategoryID().isPresent()){
+                Optional<Category> category=this._categoryRepository.findById(eventReqDto.getCategoryID().get());
+                if(category.isPresent()){
+                    event.get().setCategory(category.get());
+                }
+            }
+            return this._eventRepository.save(event.get());
+        }
         return null;
     }
 
