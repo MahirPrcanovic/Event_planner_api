@@ -1,4 +1,4 @@
-package com.example.dogadjaji213.dto;
+package com.example.dogadjaji213.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

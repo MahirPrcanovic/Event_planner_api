@@ -1,10 +1,8 @@
 package com.example.dogadjaji213.controller;
 
-import com.example.dogadjaji213.dto.CategoryReqDto;
-import com.example.dogadjaji213.dto.UpdateCategoryReqDto;
-import com.example.dogadjaji213.dto.UpdateLocationReqDto;
+import com.example.dogadjaji213.dto.category.CategoryReqDto;
+import com.example.dogadjaji213.dto.category.UpdateCategoryReqDto;
 import com.example.dogadjaji213.model.Category;
-import com.example.dogadjaji213.model.Location;
 import com.example.dogadjaji213.service.category.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

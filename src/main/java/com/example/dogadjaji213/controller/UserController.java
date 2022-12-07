@@ -1,7 +1,7 @@
 package com.example.dogadjaji213.controller;
 
-import com.example.dogadjaji213.dto.ChangePassDto;
-import com.example.dogadjaji213.dto.RegisterReqDto;
+import com.example.dogadjaji213.dto.user.ChangePassDto;
+import com.example.dogadjaji213.dto.user.RegisterReqDto;
 import com.example.dogadjaji213.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

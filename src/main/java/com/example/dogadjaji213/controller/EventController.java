@@ -1,10 +1,9 @@
 package com.example.dogadjaji213.controller;
-import com.example.dogadjaji213.dto.EventReqDto;
-import com.example.dogadjaji213.dto.UpdateEventReqDto;
+import com.example.dogadjaji213.dto.event.EventReqDto;
+import com.example.dogadjaji213.dto.event.UpdateEventReqDto;
 import com.example.dogadjaji213.model.Event;
 import com.example.dogadjaji213.service.event.EventService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

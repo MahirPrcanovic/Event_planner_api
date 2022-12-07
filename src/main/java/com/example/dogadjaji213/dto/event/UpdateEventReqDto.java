@@ -1,4 +1,4 @@
-package com.example.dogadjaji213.dto;
+package com.example.dogadjaji213.dto.event;
 
 import com.example.dogadjaji213.model.Category;
 import com.example.dogadjaji213.model.Location;

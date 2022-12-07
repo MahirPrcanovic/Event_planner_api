@@ -1,4 +1,4 @@
-package com.example.dogadjaji213.dto;
+package com.example.dogadjaji213.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

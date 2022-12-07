@@ -1,8 +1,8 @@
 package com.example.dogadjaji213;
-import com.example.dogadjaji213.dto.CategoryReqDto;
-import com.example.dogadjaji213.dto.EventReqDto;
-import com.example.dogadjaji213.dto.LocationReqDto;
-import com.example.dogadjaji213.dto.RegisterReqDto;
+import com.example.dogadjaji213.dto.category.CategoryReqDto;
+import com.example.dogadjaji213.dto.event.EventReqDto;
+import com.example.dogadjaji213.dto.location.LocationReqDto;
+import com.example.dogadjaji213.dto.user.RegisterReqDto;
 import com.example.dogadjaji213.model.Role;
 import com.example.dogadjaji213.service.category.CategoryService;
 import com.example.dogadjaji213.service.event.EventService;
@@ -14,7 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 @SpringBootApplication
 public class Dogadjaji213Application {
     public static void main(String[] args) {

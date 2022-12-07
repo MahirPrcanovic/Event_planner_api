@@ -1,7 +1,7 @@
 package com.example.dogadjaji213.service.event;
 
-import com.example.dogadjaji213.dto.EventReqDto;
-import com.example.dogadjaji213.dto.UpdateEventReqDto;
+import com.example.dogadjaji213.dto.event.EventReqDto;
+import com.example.dogadjaji213.dto.event.UpdateEventReqDto;
 import com.example.dogadjaji213.model.Event;
 import org.springframework.stereotype.Service;
 

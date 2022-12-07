@@ -1,7 +1,7 @@
 package com.example.dogadjaji213.service.user;
 
-import com.example.dogadjaji213.dto.RegisterReqDto;
-import com.example.dogadjaji213.dto.UserCreatedResDto;
+import com.example.dogadjaji213.dto.user.RegisterReqDto;
+import com.example.dogadjaji213.dto.user.UserCreatedResDto;
 import com.example.dogadjaji213.model.AppUser;
 import com.example.dogadjaji213.model.Role;
 import org.springframework.stereotype.Service;

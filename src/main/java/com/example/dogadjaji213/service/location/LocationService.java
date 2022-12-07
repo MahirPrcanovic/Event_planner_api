@@ -1,13 +1,12 @@
 package com.example.dogadjaji213.service.location;
 
-import com.example.dogadjaji213.dto.LocationReqDto;
-import com.example.dogadjaji213.dto.UpdateLocationReqDto;
+import com.example.dogadjaji213.dto.location.LocationReqDto;
+import com.example.dogadjaji213.dto.location.UpdateLocationReqDto;
 import com.example.dogadjaji213.model.Location;
 import com.example.dogadjaji213.repository.LocationRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;

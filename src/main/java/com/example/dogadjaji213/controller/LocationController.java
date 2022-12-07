@@ -1,19 +1,17 @@
 package com.example.dogadjaji213.controller;
 
 
-import com.example.dogadjaji213.dto.LocationReqDto;
-import com.example.dogadjaji213.dto.UpdateLocationReqDto;
+import com.example.dogadjaji213.dto.location.LocationReqDto;
+import com.example.dogadjaji213.dto.location.UpdateLocationReqDto;
 import com.example.dogadjaji213.model.Location;
 import com.example.dogadjaji213.service.location.LocationService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
