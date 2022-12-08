@@ -24,11 +24,12 @@ public class CommentService implements ICommentService{
     @Override
     public Comment addComment(UUID id, CommentReqDto commentReqDto) {
         String auth = SecurityContextHolder.getContext().getAuthentication().getName();
-        AppUser appUser = this._userRepository.findByEmail("asimb@gmail.com");
+        AppUser appUser = this._userRepository.findByEmail("asim2b@gmail.com");
         if(appUser == null) throw new IllegalStateException("User not found.");
         Optional<Event> event = this._eventRepository.findById(id);
         if(event.isPresent()){
             Comment comment = this._commentRepository.save(new Comment(commentReqDto.getComment(),appUser,event.get()));
+            return comment;
         }
         return null;
     }

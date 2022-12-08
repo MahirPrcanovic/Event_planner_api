@@ -14,12 +14,9 @@ import java.util.Optional;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GlobalResponseDto {
     private boolean success=true;
-
     private Optional<String> message;
-
     private Optional<List<?>> data;
     private Optional<?> item;
-
     private Optional<Integer> page;
     private Optional<Integer> count;
 }
