@@ -5,6 +5,7 @@ import com.example.dogadjaji213.model.Event;
 import com.example.dogadjaji213.service.event.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/event")
+@CrossOrigin("*")
 public class EventController {
     private final EventService _eventService;
     /*@GetMapping

@@ -17,6 +17,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/location")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class LocationController {
     private final LocationService _locationService;
 

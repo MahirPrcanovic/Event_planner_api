@@ -13,6 +13,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/comment")
+@CrossOrigin("*")
 public class CommentController {
     private final CommentService _commentService;
     @PutMapping("/{id}")

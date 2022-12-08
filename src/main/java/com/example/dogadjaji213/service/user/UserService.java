@@ -1,13 +1,20 @@
 package com.example.dogadjaji213.service.user;
 
+import com.example.dogadjaji213.dto.JwtResponse;
 import com.example.dogadjaji213.dto.user.RegisterReqDto;
 import com.example.dogadjaji213.dto.user.UserCreatedResDto;
+import com.example.dogadjaji213.dto.user.UserLoginReqDto;
 import com.example.dogadjaji213.model.AppUser;
 import com.example.dogadjaji213.model.Role;
 import com.example.dogadjaji213.repository.RoleRepository;
 import com.example.dogadjaji213.repository.UserRepository;
+import com.example.dogadjaji213.utils.JwtUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,6 +31,7 @@ public class UserService implements IUserService,UserDetailsService {
     private final UserRepository _userRepository;
     private final RoleRepository _roleRepository;
     private final PasswordEncoder _passwordEncoder;
+    private final JwtUtil _jwtUtil;
     @Override
     public UserCreatedResDto saveUser(RegisterReqDto appUser) {
         AppUser user = new AppUser(appUser.getFirstName(), appUser.getLastName(), appUser.getEmail(), appUser.getPassword());
@@ -81,6 +89,25 @@ public class UserService implements IUserService,UserDetailsService {
         if(appUser == null) throw new IllegalStateException("User does not exist!");
         appUser.setIsBanned(!appUser.getIsBanned());
         this._userRepository.save(appUser);
+    }
+
+    @Override
+    public JwtResponse createToken(UserLoginReqDto user) throws Exception {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        authenticate(username,password);
+        final UserDetails userDetails = loadUserByUsername(username);
+        String newGeneratedToken= this._jwtUtil.generateToken(userDetails);
+        AppUser appUser = this._userRepository.findByEmail(username);
+        return new JwtResponse(username,newGeneratedToken);
+    }
+    private void authenticate(String username,String password) throws Exception{
+
+            AppUser authUser = this._userRepository.findByEmail(username);
+            if( authUser == null ) throw new DisabledException("");
+            boolean passwordCorrect= this._passwordEncoder.matches(password,authUser.getPassword());
+            if(!passwordCorrect) throw new BadCredentialsException("Passwords do not match");
+
     }
 
     @Override

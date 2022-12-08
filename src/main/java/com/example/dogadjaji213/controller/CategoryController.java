@@ -16,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/category")
+@CrossOrigin("*")
 public class CategoryController {
     private final CategoryService _categoryService;
     @GetMapping
