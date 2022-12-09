@@ -11,7 +11,7 @@ import java.util.UUID;
 @Service
 public interface IEventService {
     List<Event> getAll();
-    Event createNewEvent(EventReqDto event);
+    Event createNewEvent(EventReqDto event) throws Exception;
     Event updateEvent(UUID id, UpdateEventReqDto eventReqDto);
     List<Event> search(String search, UUID location, UUID category) throws InterruptedException;
 }

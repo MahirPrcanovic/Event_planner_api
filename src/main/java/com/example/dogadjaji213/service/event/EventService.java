@@ -30,9 +30,10 @@ public class EventService implements IEventService {
         return this._eventRepository.findAll();
     }
     @Override
-    public Event createNewEvent(EventReqDto event) {
+    public Event createNewEvent(EventReqDto event) throws Exception {
         Location location = this._locationRepository.findById(event.getLocationID()).get();
         Category category= this._categoryRepository.findById(event.getCategoryID()).get();
+        if(location==null || category==null) throw new Exception("Category or location not found.");
         Event saveEvent = new Event(null,event.getName(),event.getDate(),event.getDescription(),event.getPicUrl(),location,category,null);
         return this._eventRepository.save(saveEvent);
     }
