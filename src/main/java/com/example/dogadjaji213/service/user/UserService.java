@@ -33,7 +33,9 @@ public class UserService implements IUserService,UserDetailsService {
     private final PasswordEncoder _passwordEncoder;
     private final JwtUtil _jwtUtil;
     @Override
-    public UserCreatedResDto saveUser(RegisterReqDto appUser) {
+    public UserCreatedResDto saveUser(RegisterReqDto appUser) throws Exception {
+        AppUser usr = this._userRepository.findByEmail(appUser.getEmail());
+        if(usr != null) throw new Exception("User with email already exists.");
         AppUser user = new AppUser(appUser.getFirstName(), appUser.getLastName(), appUser.getEmail(), appUser.getPassword());
         user.setPassword(this._passwordEncoder.encode(appUser.getPassword()));
         var returnUser=this._userRepository.save(user);

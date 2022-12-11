@@ -1,5 +1,6 @@
 package com.example.dogadjaji213.controller;
 
+import com.example.dogadjaji213.dto.GlobalResponseDto;
 import com.example.dogadjaji213.dto.JwtResponse;
 import com.example.dogadjaji213.dto.user.ChangePassDto;
 import com.example.dogadjaji213.dto.user.RegisterReqDto;
@@ -44,9 +45,9 @@ public class UserController {
         try{
             return ResponseEntity.ok().body(this._userService.createToken(user));
         }catch(DisabledException ex){
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("User with your email does not exist");
         }catch(BadCredentialsException ex){
-            return ResponseEntity.badRequest().body("Credentials dont match");
+            return ResponseEntity.badRequest().body("Password is not correct.");
         }
 
     }
@@ -55,9 +56,18 @@ public class UserController {
         return "hello";
     }
     @PostMapping("/save")
-    public ResponseEntity<?> register(@RequestBody RegisterReqDto registerDto){
-
-        return ResponseEntity.ok().body(this._userService.saveUser(registerDto));
+    public ResponseEntity<GlobalResponseDto> register(@RequestBody RegisterReqDto registerDto){
+        var response = new GlobalResponseDto();
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/save").toUriString());
+        try{
+            this._userService.saveUser(registerDto);
+            response.setMessage("Successfully registered.".describeConstable());
+            return ResponseEntity.created(uri).body(response);
+        }catch(Exception ex){
+            response.setSuccess(false);
+            response.setMessage(ex.getMessage().describeConstable());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
     @PutMapping("/changepass")
     public ResponseEntity<?> changePass(@RequestBody ChangePassDto changePassDto){

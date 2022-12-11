@@ -1,8 +1,12 @@
 package com.example.dogadjaji213.utils;
 
+import com.example.dogadjaji213.model.AppUser;
+import com.example.dogadjaji213.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +16,11 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
+@RequiredArgsConstructor
 public class JwtUtil {
     private static final String SECRET_KEY = "jwtsecretkeyidk";
     private static final Integer TOKEN_VALIDITY=3600*5;
-
+    private final UserRepository _userRepository;
 
     public String getUserNameFromToken(String token){
         return getClaimFromToken(token,Claims::getSubject);
@@ -39,7 +44,9 @@ public class JwtUtil {
         return getClaimFromToken(token,Claims::getExpiration);
     }
     public String generateToken(UserDetails userDetails){
+        AppUser usr= this._userRepository.findByEmail(userDetails.getUsername());
         Map<String,Object> claims = new HashMap<>();
+        claims.put("role",usr.getRole().getName());
         return Jwts.builder().setClaims(claims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+TOKEN_VALIDITY * 1000))

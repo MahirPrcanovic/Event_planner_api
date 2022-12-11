@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Service
 public interface IUserService {
-    UserCreatedResDto saveUser(RegisterReqDto appUser);
+    UserCreatedResDto saveUser(RegisterReqDto appUser) throws Exception;
     Role saveRole(Role saveRole);
     void addRoleToUser(String email,String roleName);
     AppUser getUser(String email);
