@@ -5,10 +5,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
    private final UserDetailsService _userDetailsService;
    private final JwtAuthenticationEntryPoint _jwtAuthenticationEntryPoint;
@@ -49,7 +51,8 @@ public class SecurityConfig {
        http.cors();
         http.csrf().disable();
         http
-                .authorizeHttpRequests((authz) -> authz.requestMatchers("/user/hi").hasAnyAuthority("USER")
+                .authorizeHttpRequests((authz) -> authz.requestMatchers(HttpMethod.GET).permitAll()
+                        .requestMatchers("/category","/location","/event","/comment").hasAnyAuthority("ADMIN")
                         .requestMatchers(HttpHeaders.ALLOW).permitAll()
                         .anyRequest().permitAll()
                 );

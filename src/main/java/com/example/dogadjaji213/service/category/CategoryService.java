@@ -5,6 +5,7 @@ import com.example.dogadjaji213.dto.category.UpdateCategoryReqDto;
 import com.example.dogadjaji213.model.Category;
 import com.example.dogadjaji213.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

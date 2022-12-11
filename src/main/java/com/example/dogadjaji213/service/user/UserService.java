@@ -99,7 +99,7 @@ public class UserService implements IUserService,UserDetailsService {
         final UserDetails userDetails = loadUserByUsername(username);
         String newGeneratedToken= this._jwtUtil.generateToken(userDetails);
         AppUser appUser = this._userRepository.findByEmail(username);
-        return new JwtResponse(username,newGeneratedToken);
+        return new JwtResponse(username,newGeneratedToken,appUser.getRole().getName());
     }
     private void authenticate(String username,String password) throws Exception{
 

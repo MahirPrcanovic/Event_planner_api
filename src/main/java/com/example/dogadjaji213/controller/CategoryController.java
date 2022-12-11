@@ -7,11 +7,11 @@ import com.example.dogadjaji213.model.Category;
 import com.example.dogadjaji213.service.category.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public class CategoryController {
             return ResponseEntity.ok().body(response);
         }catch(Exception ex){
             response.setSuccess(false);
-            response.setMessage("Error has occurred.".describeConstable());
+            response.setMessage(ex.getMessage().describeConstable());
             return ResponseEntity.badRequest().body(response);
         }
     }

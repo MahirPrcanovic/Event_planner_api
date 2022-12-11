@@ -1,6 +1,7 @@
 package com.example.dogadjaji213.controller;
 
 
+import com.example.dogadjaji213.dto.GlobalResponseDto;
 import com.example.dogadjaji213.dto.location.LocationReqDto;
 import com.example.dogadjaji213.dto.location.UpdateLocationReqDto;
 import com.example.dogadjaji213.model.Location;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -22,16 +24,50 @@ public class LocationController {
     private final LocationService _locationService;
 
     @GetMapping
-    public ResponseEntity<List<Location>> Get(){
-        return ResponseEntity.ok().body(this._locationService.getAll());
+    public ResponseEntity<GlobalResponseDto> Get(){
+        var response = new GlobalResponseDto();
+        try {
+            var locations = this._locationService.getAll();
+            response.setData(Optional.ofNullable(locations));
+            response.setMessage("Success.".describeConstable());
+            response.setCount(Optional.of(locations.size()));
+            response.setPage(Optional.of(1));
+            return ResponseEntity.ok().body(response);
+        }catch(Exception ex){
+            response.setSuccess(false);
+            response.setMessage("Items could not get retrieved.".describeConstable());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
     @PostMapping
-    public ResponseEntity<Location> Post(@RequestBody LocationReqDto location){
+    public ResponseEntity<GlobalResponseDto> Post(@RequestBody LocationReqDto location){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/location").toUriString());
-        return ResponseEntity.created(uri).body(this._locationService.createNewLocation(location));
+        var response = new GlobalResponseDto();
+        try{
+            var loc = this._locationService.createNewLocation(location);
+            if(loc == null) throw new Exception("Could not save location. Please check your sent information.");
+            response.setItem(Optional.ofNullable(loc));
+            response.setMessage("Successfully created location.".describeConstable());
+            return ResponseEntity.created(uri).body(response);
+        }catch(Exception ex){
+            response.setSuccess(false);
+            response.setMessage(ex.getMessage().describeConstable());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
     @PatchMapping("/{id}")
-    public ResponseEntity<Location> Patch(@PathVariable UUID id, @RequestBody UpdateLocationReqDto locationReqDto){
-        return ResponseEntity.ok().body(this._locationService.updateLocation(id,locationReqDto));
+    public ResponseEntity<GlobalResponseDto> Patch(@PathVariable UUID id, @RequestBody UpdateLocationReqDto locationReqDto){
+        var response = new GlobalResponseDto();
+        try{
+            var loc = this._locationService.updateLocation(id,locationReqDto);
+            if(loc == null) throw new Exception("Could not update location. Please check your sent information.");
+            response.setItem(Optional.ofNullable(loc));
+            response.setMessage("Successully updated location".describeConstable());
+            return ResponseEntity.ok().body(response);
+        }catch(Exception ex){
+            response.setSuccess(false);
+            response.setMessage(ex.getMessage().describeConstable());
+            return ResponseEntity.ok().body(response);
+        }
     }
 }
