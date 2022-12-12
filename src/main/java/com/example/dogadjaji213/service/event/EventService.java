@@ -1,5 +1,6 @@
 package com.example.dogadjaji213.service.event;
 import com.example.dogadjaji213.dto.event.EventReqDto;
+import com.example.dogadjaji213.dto.event.EventResDto;
 import com.example.dogadjaji213.dto.event.UpdateEventReqDto;
 import com.example.dogadjaji213.model.Category;
 import com.example.dogadjaji213.model.Event;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -70,7 +72,10 @@ public class EventService implements IEventService {
         }
         return null;
     }
-
+    @Override
+    public Event getSingleEvent(UUID id){
+        return this._eventRepository.findById(id).get();
+    }
     @Override
     public List<Event> search(String search, UUID location, UUID category) {
         return this._eventRepository.findByDateGreaterThanEqualAndNameContainsOrLocation_IdOrCategory_Id(LocalDate.now(),search,location,category);

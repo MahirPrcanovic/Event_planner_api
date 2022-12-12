@@ -66,4 +66,19 @@ public class EventController {
             return ResponseEntity.badRequest().body(response);
         }
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<GlobalResponseDto> GetSingle(@PathVariable UUID id){
+        var response = new GlobalResponseDto();
+        try{
+            var event = this._eventService.getSingleEvent(id);
+            if(event == null) throw new IndexOutOfBoundsException("Item does not exist");
+            response.setItem(Optional.of(event));
+            response.setMessage("Success".describeConstable());
+            return ResponseEntity.ok(response);
+        }catch(Exception ex){
+            response.setSuccess(false);
+            response.setMessage(ex.getMessage().describeConstable());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
 }

@@ -18,7 +18,7 @@ import java.util.function.Function;
 @Component
 @RequiredArgsConstructor
 public class JwtUtil {
-    private static final String SECRET_KEY = "jwtsecretkeyidk";
+    private static final String SECRET_KEY = "notGoodIdeaLeavingThisSeenButWhatever";
     private static final Integer TOKEN_VALIDITY=3600*5;
     private final UserRepository _userRepository;
 

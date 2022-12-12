@@ -98,10 +98,18 @@ public class UserService implements IUserService,UserDetailsService {
         String username = user.getUsername();
         String password = user.getPassword();
         authenticate(username,password);
-        final UserDetails userDetails = loadUserByUsername(username);
-        String newGeneratedToken= this._jwtUtil.generateToken(userDetails);
         AppUser appUser = this._userRepository.findByEmail(username);
-        return new JwtResponse(username,newGeneratedToken,appUser.getRole().getName());
+        if(user.getRememberMe().isPresent()) {
+            if (user.getRememberMe().get() == false) { // ako user nije stavio rememberMe, nece se token ni kreirati
+                return new JwtResponse(username, "", appUser.getRole().getName());
+
+            }else{
+                final UserDetails userDetails = loadUserByUsername(username);
+                String newGeneratedToken= this._jwtUtil.generateToken(userDetails);
+                return new JwtResponse(username,newGeneratedToken,appUser.getRole().getName());
+            }
+        }
+        return new JwtResponse(username, "", appUser.getRole().getName());
     }
     private void authenticate(String username,String password) throws Exception{
 

@@ -14,4 +14,5 @@ public interface IEventService {
     Event createNewEvent(EventReqDto event) throws Exception;
     Event updateEvent(UUID id, UpdateEventReqDto eventReqDto);
     List<Event> search(String search, UUID location, UUID category) throws InterruptedException;
+    Event getSingleEvent(UUID id);
 }
