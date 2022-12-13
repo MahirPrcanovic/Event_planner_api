@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -55,6 +53,7 @@ public class EventController {
     @GetMapping
     public ResponseEntity<GlobalResponseDto> GetSearch(@RequestParam(value = "search",required = false,defaultValue = "") String search, @RequestParam(value = "location",required = false,defaultValue = "") String location, @RequestParam(value = "category",required = false,defaultValue = "") String category){
         var response = new GlobalResponseDto();
+
         try{
             var events = this._eventService.search(search.trim(), location.trim().isEmpty() ? UUID.fromString("00000000-0000-0000-0000-000000000000") : UUID.fromString(location), category.trim().isEmpty() ? UUID.fromString("00000000-0000-0000-0000-000000000000") : UUID.fromString(category));
             response.setData(Optional.ofNullable(events));

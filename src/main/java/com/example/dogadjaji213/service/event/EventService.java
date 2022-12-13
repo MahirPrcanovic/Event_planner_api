@@ -13,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -78,6 +75,36 @@ public class EventService implements IEventService {
     }
     @Override
     public List<Event> search(String search, UUID location, UUID category) {
+        System.out.println(search);
+        System.out.println(location);
+        System.out.println(category);
+
+        var events = new HashSet<Event>();
+        boolean equals = location.toString().trim().equals("00000000-0000-0000-0000-000000000000");
+        boolean equals1 = category.toString().trim().equals("00000000-0000-0000-0000-000000000000");
+        if(!search.trim().equals("")){
+            System.out.println("Usao u search");
+            events.addAll(this._eventRepository.findByDateGreaterThanEqualAndNameContains(LocalDate.now(),search));
+        }
+        if(!equals){
+            System.out.println("Usao u location");
+            events.addAll(this._eventRepository.findByDateGreaterThanEqualAndLocation_Id(LocalDate.now(),location));
+        }
+        if(!equals1){
+            System.out.println("Usao u category");
+            events.addAll(this._eventRepository.findByDateGreaterThanEqualAndCategory_Id(LocalDate.now(),category));
+        }
+        if(equals1 && equals){
+            System.out.println("Usao u equals i equals2 ");
+            events.clear();
+            events.addAll(this._eventRepository.findByDateGreaterThanEqualAndNameContains(LocalDate.now(),search));
+        }
+       /* if(search.trim() == "" && equals && equals1){
+            events.addAll(this._eventRepository.findByDateGreaterThanEqualAndNameContains(LocalDate.now(),search));
+        }*/
+        return events.stream().toList();
+/*
         return this._eventRepository.findByDateGreaterThanEqualAndNameContainsOrLocation_IdOrCategory_Id(LocalDate.now(),search,location,category);
+*/
     }
 }

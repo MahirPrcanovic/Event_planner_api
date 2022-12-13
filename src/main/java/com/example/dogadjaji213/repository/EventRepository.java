@@ -11,5 +11,8 @@ import java.util.List;
 import java.util.UUID;
 @Repository
 public interface EventRepository extends JpaRepository<Event, UUID> {
+   List<Event> findByDateGreaterThanEqualAndNameContains(LocalDate date,String name);
+   List<Event> findByDateGreaterThanEqualAndLocation_Id(LocalDate date,UUID location);
+   List<Event> findByDateGreaterThanEqualAndCategory_Id(LocalDate date,UUID category);
    List<Event> findByDateGreaterThanEqualAndNameContainsOrLocation_IdOrCategory_Id(LocalDate date,String name, UUID location, UUID category);
 }
