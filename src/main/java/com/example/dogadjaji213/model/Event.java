@@ -23,6 +23,7 @@ public class Event {
     private UUID id;
     private String name;
     private LocalDate date;
+    @Column(columnDefinition="TEXT")
     private String description;
     private String pictureUrl;
     @ManyToOne

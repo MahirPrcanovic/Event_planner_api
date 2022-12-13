@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public class CommentService implements ICommentService{
         if(appUser == null) throw new IllegalStateException("User not found.");
         Optional<Event> event = this._eventRepository.findById(id);
         if(event.isPresent()){
-            Comment comment = this._commentRepository.save(new Comment(commentReqDto.getComment(),appUser,event.get()));
+            Comment comment = this._commentRepository.save(new Comment(commentReqDto.getComment(),appUser,event.get(), LocalDate.now()));
             return comment;
         }
         return null;
