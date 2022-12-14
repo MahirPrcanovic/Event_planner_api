@@ -8,5 +8,5 @@ import java.util.UUID;
 
 @Service
 public interface ICommentService {
-    Comment addComment(UUID id, CommentReqDto commentReqDto);
+    Comment addComment(UUID id, CommentReqDto commentReqDto) throws Exception;
 }

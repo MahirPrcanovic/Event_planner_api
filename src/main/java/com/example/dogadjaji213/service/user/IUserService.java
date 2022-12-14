@@ -19,6 +19,6 @@ public interface IUserService {
     AppUser getUser(String email);
     List<AppUser> getUsers();
     AppUser changePassword(String password);
-    void updateIsBanned(UUID id);
+    void updateIsBanned(UUID id) throws Exception;
     JwtResponse createToken(UserLoginReqDto user) throws Exception;
 }

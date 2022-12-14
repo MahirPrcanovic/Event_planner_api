@@ -77,9 +77,17 @@ public class UserController {
         return ResponseEntity.ok().body(this._userService.changePassword(changePassDto.getPassword()));
     }
     @PatchMapping("/ban/{id}")
-    public ResponseEntity<?> updateUserBanned(@PathVariable UUID id){
+    public ResponseEntity<GlobalResponseDto> updateUserBanned(@PathVariable UUID id){
+        var response = new GlobalResponseDto();
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/ban/{id}").toUriString());
-        this._userService.updateIsBanned(id);
-        return ResponseEntity.created(uri).body("");
+        try{
+            this._userService.updateIsBanned(id);
+            response.setMessage("Success".describeConstable());
+            return ResponseEntity.created(uri).body(response);
+        }catch(Exception ex) {
+            response.setSuccess(false);
+            response.setMessage(ex.getMessage().describeConstable());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
 }

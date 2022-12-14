@@ -38,7 +38,6 @@ public class AppUser {
     private String email;
     @JsonIgnore
     private String password;
-    @JsonIgnore
     private Boolean isBanned;
     @ManyToOne
     @JsonIgnore

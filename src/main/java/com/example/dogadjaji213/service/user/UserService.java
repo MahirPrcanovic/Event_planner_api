@@ -86,9 +86,10 @@ public class UserService implements IUserService,UserDetailsService {
     }
 
     @Override
-    public void updateIsBanned(UUID id) {
+    public void updateIsBanned(UUID id) throws Exception{
         AppUser appUser = this._userRepository.findById(id).get();
         if(appUser == null) throw new IllegalStateException("User does not exist!");
+        if(appUser.getEmail().equals("mahirprcanovic@gmail.com")) throw new Exception("You cannot ban yourself.");
         appUser.setIsBanned(!appUser.getIsBanned());
         this._userRepository.save(appUser);
     }

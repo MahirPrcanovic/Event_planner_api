@@ -23,10 +23,11 @@ public class CommentService implements ICommentService{
     private final EventRepository _eventRepository;
     private final UserRepository _userRepository;
     @Override
-    public Comment addComment(UUID id, CommentReqDto commentReqDto) {
+    public Comment addComment(UUID id, CommentReqDto commentReqDto) throws Exception{
         String auth = SecurityContextHolder.getContext().getAuthentication().getName();
         AppUser appUser = this._userRepository.findByEmail(auth);
         if(appUser == null) throw new IllegalStateException("User not found.");
+        if(appUser.getIsBanned()) throw new IllegalStateException("You can't comment due to your ban.");
         Optional<Event> event = this._eventRepository.findById(id);
         if(event.isPresent()){
             Comment comment = this._commentRepository.save(new Comment(commentReqDto.getComment(),appUser,event.get(), LocalDate.now()));
