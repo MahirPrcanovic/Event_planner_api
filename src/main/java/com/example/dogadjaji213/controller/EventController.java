@@ -42,6 +42,7 @@ public class EventController {
             var event = this._eventService.updateEvent(id,eventReqDto);
             if (event == null) throw new Exception("Event is not updated. Please check your sent information.");
             response.setMessage("Success".describeConstable());
+            response.setItem(Optional.of(event));
             return ResponseEntity.ok().body(response);
         }catch (Exception ex){
             response.setSuccess(false);

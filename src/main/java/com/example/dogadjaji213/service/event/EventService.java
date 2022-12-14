@@ -83,19 +83,15 @@ public class EventService implements IEventService {
         boolean equals = location.toString().trim().equals("00000000-0000-0000-0000-000000000000");
         boolean equals1 = category.toString().trim().equals("00000000-0000-0000-0000-000000000000");
         if(!search.trim().equals("")){
-            System.out.println("Usao u search");
             events.addAll(this._eventRepository.findByDateGreaterThanEqualAndNameContains(LocalDate.now(),search));
         }
         if(!equals){
-            System.out.println("Usao u location");
             events.addAll(this._eventRepository.findByDateGreaterThanEqualAndLocation_Id(LocalDate.now(),location));
         }
         if(!equals1){
-            System.out.println("Usao u category");
             events.addAll(this._eventRepository.findByDateGreaterThanEqualAndCategory_Id(LocalDate.now(),category));
         }
         if(equals1 && equals){
-            System.out.println("Usao u equals i equals2 ");
             events.clear();
             events.addAll(this._eventRepository.findByDateGreaterThanEqualAndNameContains(LocalDate.now(),search));
         }
