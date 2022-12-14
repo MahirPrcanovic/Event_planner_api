@@ -48,4 +48,9 @@ public class LocationService implements ILocation{
         }
         return null;
     }
+
+    @Override
+    public Location getSingleLocation(UUID id) {
+        return this._locationRepo.findById(id).get();
+    }
 }

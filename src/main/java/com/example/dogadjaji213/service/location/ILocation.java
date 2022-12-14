@@ -13,4 +13,5 @@ public interface ILocation {
     List<Location> getAll();
     Location createNewLocation(LocationReqDto location);
     Location updateLocation(UUID id, UpdateLocationReqDto locationReqDto);
+    Location getSingleLocation(UUID id);
 }

@@ -5,6 +5,7 @@ import com.example.dogadjaji213.dto.GlobalResponseDto;
 import com.example.dogadjaji213.dto.location.LocationReqDto;
 import com.example.dogadjaji213.dto.location.UpdateLocationReqDto;
 import com.example.dogadjaji213.model.Location;
+import com.example.dogadjaji213.model.ResponseException;
 import com.example.dogadjaji213.service.location.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -68,6 +69,22 @@ public class LocationController {
             response.setSuccess(false);
             response.setMessage(ex.getMessage().describeConstable());
             return ResponseEntity.ok().body(response);
+        }
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<GlobalResponseDto> GetSingle(@PathVariable UUID id){
+        var response = new GlobalResponseDto();
+        try{
+            var location = this._locationService.getSingleLocation(id);
+            if(location == null) throw new ResponseException("Item does not exist.");
+            response.setMessage("Success".describeConstable());
+            response.setItem(Optional.of(location));
+            return ResponseEntity.ok().body(response);
+        }catch(Exception ex){
+            response.setSuccess(false);
+            System.out.println(ex.getMessage());
+            response.setMessage(ex.getMessage().describeConstable());
+            return ResponseEntity.badRequest().body(response);
         }
     }
 }
