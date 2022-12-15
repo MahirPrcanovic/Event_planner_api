@@ -42,4 +42,9 @@ public class CategoryService implements ICategory{
         }
         return null;
     }
+
+    @Override
+    public Category getSingle(UUID id) {
+        return this._categoryRepository.findById(id).get();
+    }
 }

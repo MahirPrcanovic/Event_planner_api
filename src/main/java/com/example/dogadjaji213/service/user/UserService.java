@@ -64,8 +64,8 @@ public class UserService implements IUserService,UserDetailsService {
     }
 
     @Override
-    public AppUser getUser(String email) {
-        AppUser user = this._userRepository.findByEmail(email);
+    public AppUser getUser(UUID id) {
+        AppUser user = this._userRepository.findById(id).get();
         if(user == null){
             throw new UsernameNotFoundException("User not found");
         }

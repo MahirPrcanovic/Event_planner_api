@@ -66,4 +66,18 @@ public class CategoryController {
             return ResponseEntity.badRequest().body(response);
         }
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<GlobalResponseDto> GetSingle(@PathVariable UUID id){
+        var response = new GlobalResponseDto();
+        try{
+            var category = this._categoryService.getSingle(id);
+            if(category == null) throw new Exception("Category not found.");
+            response.setItem(Optional.ofNullable(category));
+            return ResponseEntity.ok().body(response);
+        }catch(Exception ex){
+            response.setSuccess(false);
+            response.setMessage(ex.getMessage().describeConstable());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
 }

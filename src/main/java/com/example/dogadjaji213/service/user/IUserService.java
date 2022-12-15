@@ -16,7 +16,7 @@ public interface IUserService {
     UserCreatedResDto saveUser(RegisterReqDto appUser) throws Exception;
     Role saveRole(Role saveRole);
     void addRoleToUser(String email,String roleName);
-    AppUser getUser(String email);
+    AppUser getUser(UUID id);
     List<AppUser> getUsers();
     AppUser changePassword(String password);
     void updateIsBanned(UUID id) throws Exception;

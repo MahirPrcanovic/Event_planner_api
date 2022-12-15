@@ -14,4 +14,5 @@ public interface ICategory {
     List<Category> getAll();
     Category createNewCategory(CategoryReqDto category);
     Category updateCategory(UUID id, UpdateCategoryReqDto category);
+    Category getSingle(UUID id);
 }

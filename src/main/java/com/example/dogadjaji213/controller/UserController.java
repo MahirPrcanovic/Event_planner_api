@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController @RequiredArgsConstructor
@@ -88,6 +89,21 @@ public class UserController {
             response.setSuccess(false);
             response.setMessage(ex.getMessage().describeConstable());
             return ResponseEntity.badRequest().body(response);
+        }
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<GlobalResponseDto> getSinge(@PathVariable UUID id){
+        var response = new GlobalResponseDto();
+        try{
+            var user = this._userService.getUser(id);
+            if(user == null) throw new Exception("User does not exist.");
+            response.setMessage("Success".describeConstable());
+            response.setItem(Optional.of(user));
+            return ResponseEntity.ok().body(response);
+        }catch(Exception ex){
+            response.setSuccess(false);
+            response.setMessage(ex.getMessage().describeConstable());
+            return (ResponseEntity<GlobalResponseDto>) ResponseEntity.notFound();
         }
     }
 }

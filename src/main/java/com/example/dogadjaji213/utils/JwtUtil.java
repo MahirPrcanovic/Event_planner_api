@@ -47,6 +47,7 @@ public class JwtUtil {
         AppUser usr= this._userRepository.findByEmail(userDetails.getUsername());
         Map<String,Object> claims = new HashMap<>();
         claims.put("role",usr.getRole().getName());
+        claims.put("id",usr.getId());
         return Jwts.builder().setClaims(claims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+TOKEN_VALIDITY * 1000))
