@@ -5,6 +5,7 @@ import com.example.dogadjaji213.dto.JwtResponse;
 import com.example.dogadjaji213.dto.user.ChangePassDto;
 import com.example.dogadjaji213.dto.user.RegisterReqDto;
 import com.example.dogadjaji213.dto.user.UserLoginReqDto;
+import com.example.dogadjaji213.model.AppUser;
 import com.example.dogadjaji213.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
@@ -71,11 +72,20 @@ public class UserController {
         }
     }
     @PutMapping("/changepass")
-    public ResponseEntity<?> changePass(@RequestBody ChangePassDto changePassDto){
-        System.out.println(changePassDto.getPassword());
+    public ResponseEntity<GlobalResponseDto> changePass(@RequestBody ChangePassDto changePassDto) throws Exception {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/changepass").toUriString());
-        this._userService.changePassword(changePassDto.getPassword());
-        return ResponseEntity.ok().body(this._userService.changePassword(changePassDto.getPassword()));
+        var response = new GlobalResponseDto();
+        try{
+            AppUser user = this._userService.changePassword(changePassDto);
+            response.setMessage("Success".describeConstable());
+            response.setItem(Optional.ofNullable(user));
+            return ResponseEntity.ok().body(response);
+        }catch(Exception ex){
+            response.setSuccess(false);
+            response.setMessage(ex.getMessage().describeConstable());
+            return ResponseEntity.badRequest().body(response);
+        }
+
     }
     @PatchMapping("/ban/{id}")
     public ResponseEntity<GlobalResponseDto> updateUserBanned(@PathVariable UUID id){

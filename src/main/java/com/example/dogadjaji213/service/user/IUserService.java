@@ -1,6 +1,7 @@
 package com.example.dogadjaji213.service.user;
 
 import com.example.dogadjaji213.dto.JwtResponse;
+import com.example.dogadjaji213.dto.user.ChangePassDto;
 import com.example.dogadjaji213.dto.user.RegisterReqDto;
 import com.example.dogadjaji213.dto.user.UserCreatedResDto;
 import com.example.dogadjaji213.dto.user.UserLoginReqDto;
@@ -18,7 +19,7 @@ public interface IUserService {
     void addRoleToUser(String email,String roleName);
     AppUser getUser(UUID id);
     List<AppUser> getUsers();
-    AppUser changePassword(String password);
+    AppUser changePassword(ChangePassDto changePassDto) throws Exception;
     void updateIsBanned(UUID id) throws Exception;
     JwtResponse createToken(UserLoginReqDto user) throws Exception;
 }

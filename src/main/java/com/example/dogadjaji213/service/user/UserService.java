@@ -1,6 +1,7 @@
 package com.example.dogadjaji213.service.user;
 
 import com.example.dogadjaji213.dto.JwtResponse;
+import com.example.dogadjaji213.dto.user.ChangePassDto;
 import com.example.dogadjaji213.dto.user.RegisterReqDto;
 import com.example.dogadjaji213.dto.user.UserCreatedResDto;
 import com.example.dogadjaji213.dto.user.UserLoginReqDto;
@@ -77,10 +78,12 @@ public class UserService implements IUserService,UserDetailsService {
         return users;
     }
     @Override
-    public AppUser changePassword(String pwd) {
-        System.out.println(pwd);
+    public AppUser changePassword(ChangePassDto changePassDto) throws Exception {
         AppUser appUser= this._userRepository.findByEmail("mahirprcanovic@gmail.com"); /*Admin je samo jedan korisnik i on je postavljen na mahirprcanovic@gmail.com account*/
-        appUser.setPassword(this._passwordEncoder.encode(pwd));
+        if(!this._passwordEncoder.matches(changePassDto.getCurrentPassword(),appUser.getPassword())){
+            throw new Exception("Passwords do not match");
+        };
+        appUser.setPassword(this._passwordEncoder.encode(changePassDto.getNewPassword()));
         return this._userRepository.save(appUser);
 
     }
